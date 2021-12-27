@@ -39,16 +39,21 @@ const List = styled.ul`
 `;
 
 const ContentList = () => {
-  const { data } = useQuery<any>("contents", contentsApi.getContents);
+  const { data, isLoading } = useQuery<any>(
+    "contents",
+    contentsApi.getContents
+  );
+  console.log(data && data.data);
 
   return (
     <List>
-      {data &&
-        data.data
-          .slice(0, 5)
-          .map((content: any) => (
-            <ContentsItem key={content?._id} content={content} />
-          ))}
+      {isLoading
+        ? "Loading..."
+        : data.data
+            .slice(0, 5)
+            .map((content: any) => (
+              <ContentsItem key={content?._id} content={content} />
+            ))}
     </List>
   );
 };
