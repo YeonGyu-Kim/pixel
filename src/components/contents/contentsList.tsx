@@ -1,7 +1,8 @@
 import { useQuery } from "react-query";
 import styled from "styled-components";
-import { contentsApi } from "../../api";
+import { contentsApi, userApi } from "../../api";
 import ContentsItem from "./contentsItem";
+import ContentsUser from "./contentsUser";
 
 interface Contents {
   data: {
@@ -37,17 +38,25 @@ const List = styled.ul`
 `;
 
 const ContentList = () => {
-  const { data, isLoading } = useQuery<any>(
+  const { data: contentsData, isLoading: contentsLoading } = useQuery<any>(
     "contents",
     contentsApi.getContents
   );
-  console.log(data && data.data);
+
+  const { data: userData, isLoading: userLoading } = useQuery<any>(
+    "user",
+    userApi.getUser
+  );
+
+  console.log(userData && userData);
 
   return (
     <List>
-      {isLoading
+      {userLoading ? "Loading..." : <ContentsUser user={userData.data} />}
+
+      {contentsLoading
         ? "Loading..."
-        : data.data
+        : contentsData.data
             .slice(0, 5)
             .map((content: any) => (
               <ContentsItem key={content?._id} content={content} />

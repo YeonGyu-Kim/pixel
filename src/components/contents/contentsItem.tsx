@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const ItemContainer = styled.div`
@@ -12,7 +13,6 @@ const ItemContainer = styled.div`
 `;
 
 const Item = styled.li`
-  display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 1rem;
@@ -44,19 +44,19 @@ const ContentsItem = ({ content }: any) => {
     content.personalPrice,
   ];
 
-  console.log(content?.userinfo?.profile);
-
   return (
     <ItemContainer>
       <Img src={content?.images} />
-      <Item>
-        <div>{content.title}</div>
-        <User>
-          <UserImg src={content?.userinfo?.profile} />
-          <span>{content?.userinfo?.username}</span>
-        </User>
-        <div>{`${Math.max(...price)} P`}</div>
-      </Item>
+      <Link to={`/${content._id}`}>
+        <Item>
+          <div>{content.title}</div>
+          <User>
+            <UserImg src={content?.userinfo?.profile} />
+            <span>{content?.userinfo?.username}</span>
+          </User>
+          <div>{`${Math.max(...price)} P`}</div>
+        </Item>
+      </Link>
     </ItemContainer>
   );
 };
