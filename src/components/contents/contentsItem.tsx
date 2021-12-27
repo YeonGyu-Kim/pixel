@@ -44,15 +44,15 @@ const ContentsItem = ({ content }: any) => {
     content.personalPrice,
   ];
 
-  console.log(content?.userinfo?.profile.thumbnail);
+  console.log(content?.userinfo?.profile);
 
   return (
     <ItemContainer>
-      <Img src={content?.images[0].thumbnail} />
+      <Img src={content?.images} />
       <Item>
         <div>{content.title}</div>
         <User>
-          <UserImg src={content?.userinfo?.profile.thumbnail} />
+          <UserImg src={content?.userinfo?.profile} />
           <span>{content?.userinfo?.username}</span>
         </User>
         <div>{`${Math.max(...price)} P`}</div>

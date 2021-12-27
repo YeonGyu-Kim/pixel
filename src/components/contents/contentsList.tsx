@@ -9,14 +9,7 @@ interface Contents {
     companyPrice: number;
     enterprisePrice: number;
     freePointDiscount: number;
-    images: [
-      {
-        name: string;
-        size: number;
-        thumbnail: string;
-        url: string;
-      }
-    ];
+    images: string;
     individualPrice: number;
     interest: number;
     isActive: boolean;
@@ -25,7 +18,12 @@ interface Contents {
     isWatermark: boolean;
     personalPrice: number;
     title: string;
-    userinfo: { _id: string; accentUser: string; username: string };
+    userinfo: {
+      _id: string;
+      accentUser: string;
+      username: string;
+      profile: string;
+    };
     view: number;
     _id: string;
   };
